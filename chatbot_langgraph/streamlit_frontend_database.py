@@ -1,5 +1,5 @@
 import streamlit as st
-from langgraph_database_backened import chatbot,retrieve_all_threads
+from langgraph_database_backend import chatbot,retrieve_all_threads
 from langchain_core.messages import HumanMessage
 import uuid
 
@@ -79,8 +79,11 @@ if user_input:
     with st.chat_message('user'):
         st.text(user_input)
 
-    
-    config = {'configurable': {'thread_id': st.session_state['thread_id']}}
+    config = {
+        "configurable":{"thread_id": st.session_state["thread_id"]},
+        "metadata": {"thread_id": st.session_state["thread_id"]},
+        "run_name": "chat_turn"
+    }
 
     with st.chat_message('assistant'):
 
